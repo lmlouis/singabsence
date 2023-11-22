@@ -1,0 +1,124 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-leave-heading" data-cy="LeaveCreateUpdateHeading" jhiTranslate="singabsenceApp.leave.home.createOrEditLabel">
+        Créer ou éditer un Leave
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="singabsenceApp.leave.id" for="field_id">Id</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="singabsenceApp.leave.type" for="field_type">Type</label>
+          <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
+            <option [ngValue]="null">{{ 'singabsenceApp.LeaveType.null' | translate }}</option>
+            <option *ngFor="let leaveType of leaveTypeValues" [value]="leaveType">
+              {{ 'singabsenceApp.LeaveType.' + leaveType | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('type')!.invalid && (editForm.get('type')!.dirty || editForm.get('type')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('type')?.errors?.required" jhiTranslate="entity.validation.required"
+              >Ce champ est obligatoire.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="singabsenceApp.leave.owner" for="field_owner">Owner</label>
+          <select
+            class="form-control"
+            id="field_owner"
+            data-cy="owner"
+            name="owner"
+            formControlName="owner"
+            [compareWith]="compareEmployee"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="employeeOption" *ngFor="let employeeOption of ownersCollection">{{ employeeOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="singabsenceApp.leave.workflow" for="field_workflow">Workflow</label>
+          <select
+            class="form-control"
+            id="field_workflow"
+            data-cy="workflow"
+            name="workflow"
+            formControlName="workflow"
+            [compareWith]="compareWorkflow"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="workflowOption" *ngFor="let workflowOption of workflowsSharedCollection">{{ workflowOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="singabsenceApp.leave.reason" for="field_reason">Reason</label>
+          <select
+            class="form-control"
+            id="field_reason"
+            data-cy="reason"
+            name="reason"
+            formControlName="reason"
+            [compareWith]="compareMessage"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="messageOption" *ngFor="let messageOption of messagesSharedCollection">{{ messageOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="singabsenceApp.leave.period" for="field_period">Period</label>
+          <select
+            class="form-control"
+            id="field_period"
+            data-cy="period"
+            name="period"
+            formControlName="period"
+            [compareWith]="compareEvent"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label jhiTranslate="singabsenceApp.leave.sentto" for="field_senttos">Sentto</label>
+          <select
+            class="form-control"
+            id="field_senttos"
+            data-cy="sentto"
+            multiple
+            name="senttos"
+            formControlName="senttos"
+            [compareWith]="compareEmployee"
+          >
+            <option [ngValue]="employeeOption" *ngFor="let employeeOption of employeesSharedCollection">{{ employeeOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

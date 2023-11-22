@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="attachment">
+      <h2 data-cy="attachmentDetailsHeading"><span jhiTranslate="singabsenceApp.attachment.detail.title">Attachment</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="singabsenceApp.attachment.id">Id</span></dt>
+        <dd>
+          <span>{{ attachment.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.attachment.name">Name</span></dt>
+        <dd>
+          <span>{{ attachment.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.attachment.category">Category</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'singabsenceApp.TypeOfAttachment.' + attachment.category }}">{{ attachment.category }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.attachment.picture">Picture</span></dt>
+        <dd>
+          <div *ngIf="attachment.picture">
+            <a (click)="openFile(attachment.picture, attachment.pictureContentType)">
+              <img
+                [src]="'data:' + attachment.pictureContentType + ';base64,' + attachment.picture"
+                style="max-width: 100%"
+                alt="attachment image"
+              />
+            </a>
+            {{ attachment.pictureContentType }}, {{ byteSize(attachment.picture) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.attachment.document">Document</span></dt>
+        <dd>
+          <div *ngIf="attachment.document">
+            <a (click)="openFile(attachment.document, attachment.documentContentType)" jhiTranslate="entity.action.open">Ouvrir</a>
+            {{ attachment.documentContentType }}, {{ byteSize(attachment.document) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.attachment.owner">Owner</span></dt>
+        <dd>
+          <div *ngIf="attachment.owner">
+            <a [routerLink]="['/employee', attachment.owner.id, 'view']">{{ attachment.owner.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/attachment', attachment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

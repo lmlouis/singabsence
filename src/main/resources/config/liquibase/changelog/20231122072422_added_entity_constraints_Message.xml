@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Message.
+    -->
+    <changeSet id="20231122072422-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="from_id"
+                                 baseTableName="message"
+                                 constraintName="fk_message__from_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employee"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="message_id"
+                                 baseTableName="rel_message__attachements"
+                                 constraintName="fk_rel_message__attachements__message_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="message"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="attachements_id"
+                                 baseTableName="rel_message__attachements"
+                                 constraintName="fk_rel_message__attachements__attachements_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="attachment"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="message_id"
+                                 baseTableName="rel_message__to"
+                                 constraintName="fk_rel_message__to__message_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="message"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="to_id"
+                                 baseTableName="rel_message__to"
+                                 constraintName="fk_rel_message__to__to_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employee"
+                                 />
+    </changeSet>
+</databaseChangeLog>

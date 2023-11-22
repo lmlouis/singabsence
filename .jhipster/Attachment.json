@@ -1,0 +1,52 @@
+{
+  "applications": ["singabsence"],
+  "changelogDate": "20231122072522",
+  "dto": "mapstruct",
+  "entityTableName": "attachment",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "category",
+      "fieldType": "TypeOfAttachment",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "IMAGE (Image .jpeg .png .jpg),DOCUMENT (Document .pdf .docx .pptx)"
+    },
+    {
+      "fieldName": "picture",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "document",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    }
+  ],
+  "name": "Attachment",
+  "relationships": [
+    {
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "attachments",
+      "relationshipName": "owner",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "message",
+      "otherEntityRelationshipName": "attachements",
+      "relationshipName": "msg",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

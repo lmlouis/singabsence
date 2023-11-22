@@ -1,0 +1,49 @@
+{
+  "applications": ["singabsence"],
+  "changelogDate": "20231122072722",
+  "dto": "mapstruct",
+  "entityTableName": "workflow",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "LeaveStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PENDING (En attente),APPROVED (Approuvé),REJECTED (Rejeté)"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Workflow",
+  "relationships": [
+    {
+      "otherEntityName": "message",
+      "otherEntityRelationshipName": "ownworkflow",
+      "relationshipName": "validation",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "leave",
+      "otherEntityRelationshipName": "ownworkflow",
+      "relationshipName": "request",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "leave",
+      "otherEntityRelationshipName": "workflow",
+      "relationshipName": "ownrequests",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

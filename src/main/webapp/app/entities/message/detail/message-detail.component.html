@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="message">
+      <h2 data-cy="messageDetailsHeading"><span jhiTranslate="singabsenceApp.message.detail.title">Message</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="singabsenceApp.message.id">Id</span></dt>
+        <dd>
+          <span>{{ message.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.message.purpose">Purpose</span></dt>
+        <dd>
+          <span>{{ message.purpose }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.message.content">Content</span></dt>
+        <dd>
+          <span>{{ message.content }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.message.sentat">Sentat</span></dt>
+        <dd>
+          <span>{{ message.sentat | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.message.isread">Isread</span></dt>
+        <dd>
+          <span>{{ message.isread }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.message.from">From</span></dt>
+        <dd>
+          <div *ngIf="message.from">
+            <a [routerLink]="['/employee', message.from.id, 'view']">{{ message.from.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.message.attachements">Attachements</span></dt>
+        <dd>
+          <span *ngFor="let attachements of message.attachements; let last = last">
+            <a [routerLink]="['/attachment', attachements.id, 'view']">{{ attachements.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.message.to">To</span></dt>
+        <dd>
+          <span *ngFor="let to of message.tos; let last = last">
+            <a [routerLink]="['/employee', to.id, 'view']">{{ to.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/message', message.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

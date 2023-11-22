@@ -1,0 +1,70 @@
+{
+  "applications": ["singabsence"],
+  "changelogDate": "20231122072422",
+  "dto": "mapstruct",
+  "entityTableName": "message",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "purpose",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "sentat",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "isread",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "Message",
+  "relationships": [
+    {
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "ownmessage",
+      "relationshipName": "from",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "attachment",
+      "otherEntityRelationshipName": "msg",
+      "relationshipName": "attachements",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "inbox",
+      "relationshipName": "to",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "leave",
+      "otherEntityRelationshipName": "reason",
+      "relationshipName": "oneleave",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "workflow",
+      "otherEntityRelationshipName": "validation",
+      "relationshipName": "ownworkflow",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}
