@@ -1,0 +1,134 @@
+<div>
+  <h2 id="page-heading" data-cy="MessageHeading">
+    <span jhiTranslate="singabsenceApp.message.home.title">Messages</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="singabsenceApp.message.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-message"
+        [routerLink]="['/message/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="singabsenceApp.message.home.createLabel">Créer un nouveau Message</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="messages?.length === 0">
+    <span jhiTranslate="singabsenceApp.message.home.notFound">Aucun Message trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="messages && messages.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.message.id">Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="purpose">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.message.purpose">Purpose</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="content">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.message.content">Content</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sentat">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.message.sentat">Sentat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="isread">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.message.isread">Isread</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="from.id">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.message.from">From</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="attachements.id">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.message.attachements">Attachements</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="to.id">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.message.to">To</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let message of messages; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/message', message.id, 'view']">{{ message.id }}</a>
+          </td>
+          <td>{{ message.purpose }}</td>
+          <td>{{ message.content }}</td>
+          <td>{{ message.sentat | formatMediumDatetime }}</td>
+          <td>{{ message.isread }}</td>
+          <td>
+            <div *ngIf="message.from">
+              <a [routerLink]="['/employee', message.from.id, 'view']">{{ message.from.id }}</a>
+            </div>
+          </td>
+          <td>
+            <span *ngFor="let attachements of message.attachements; let last = last">
+              <a class="form-control-static" [routerLink]="['/attachment', attachements.id, 'view']">{{ attachements.id }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <span *ngFor="let to of message.tos; let last = last">
+              <a class="form-control-static" [routerLink]="['/employee', to.id, 'view']">{{ to.id }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <a [routerLink]="['/message', message.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </a>
+
+              <a [routerLink]="['/message', message.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </a>
+
+              <button type="submit" (click)="delete(message)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

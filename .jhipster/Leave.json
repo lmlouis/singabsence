@@ -1,0 +1,72 @@
+{
+  "applications": ["singabsence"],
+  "changelogDate": "20231122072322",
+  "dto": "mapstruct",
+  "entityTableName": "leave",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "LeaveType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PAID_LEAVE (Congé payé),UNPAID_LEAVE (Congé sans solde),ANNUAL_LEAVE (Congé annuel),SICK_LEAVE (Congé de maladie),MATERNITY_PATERNITY_LEAVE (Congé de maternité/paternité),PARENTAL_LEAVE (Congé parental),SABBATICAL_LEAVE (Congé sabbatique),PROFESSIONAL_DEVELOPMENT_LEAVE (Congé de formation professionnelle),BEREAVEMENT_LEAVE (Congé de deuil),MARRIAGE_LEAVE (Congé de mariage),MILITARY_SERVICE_LEAVE (Congé pour obligations militaires),RELOCATION_LEAVE (Congé pour déménagement),FAMILY_EVENTS_LEAVE (Congé pour événements familiaux),BLOOD_DONATION_LEAVE (Congé pour don de sang),GRIEF_LEAVE (Congé de deuil),COMPENSATORY_LEAVE (Congé de récupération),CIVIC_SERVICE_LEAVE (Congé pour service civique),OTHER (Autre)"
+    }
+  ],
+  "name": "Leave",
+  "relationships": [
+    {
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "request",
+      "relationshipName": "owner",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "workflow",
+      "otherEntityRelationshipName": "ownrequests",
+      "relationshipName": "workflow",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "message",
+      "otherEntityRelationshipName": "oneleave",
+      "relationshipName": "reason",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "oneleave",
+      "relationshipName": "period",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "requests",
+      "relationshipName": "sentto",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "workflow",
+      "otherEntityRelationshipName": "request",
+      "relationshipName": "ownworkflow",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "leaves",
+      "relationshipName": "requestedby",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

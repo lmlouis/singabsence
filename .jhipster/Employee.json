@@ -1,0 +1,134 @@
+{
+  "applications": ["singabsence"],
+  "changelogDate": "20231122072122",
+  "dto": "mapstruct",
+  "entityTableName": "employee",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "fullname",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "position",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "location",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "birthday",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Employee",
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "authenticateby",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipWithBuiltInEntity": true
+    },
+    {
+      "otherEntityName": "calendar",
+      "otherEntityRelationshipName": "owner",
+      "relationshipName": "calendar",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "attachment",
+      "otherEntityRelationshipName": "owner",
+      "relationshipName": "attachments",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "creator",
+      "relationshipName": "createdevents",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "leave",
+      "otherEntityRelationshipName": "requestedby",
+      "relationshipName": "leaves",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "organization",
+      "otherEntityRelationshipName": "director",
+      "relationshipName": "ownenterprise",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "team",
+      "otherEntityRelationshipName": "lead",
+      "relationshipName": "ownteam",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "message",
+      "otherEntityRelationshipName": "from",
+      "relationshipName": "ownmessage",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "leave",
+      "otherEntityRelationshipName": "owner",
+      "relationshipName": "request",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "team",
+      "otherEntityRelationshipName": "ownmember",
+      "relationshipName": "service",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "message",
+      "otherEntityRelationshipName": "to",
+      "relationshipName": "inbox",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "team",
+      "otherEntityRelationshipName": "members",
+      "relationshipName": "teams",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "leave",
+      "otherEntityRelationshipName": "sentto",
+      "relationshipName": "requests",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

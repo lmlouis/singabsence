@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Employee.
+    -->
+    <changeSet id="20231122072122-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="authenticateby_id"
+                                 baseTableName="employee"
+                                 constraintName="fk_employee__authenticateby_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="calendar_id"
+                                 baseTableName="employee"
+                                 constraintName="fk_employee__calendar_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="calendar"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="employee_id"
+                                 baseTableName="rel_employee__leaves"
+                                 constraintName="fk_rel_employee__leaves__employee_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employee"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="leaves_id"
+                                 baseTableName="rel_employee__leaves"
+                                 constraintName="fk_rel_employee__leaves__leaves_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="leave"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="service_id"
+                                 baseTableName="employee"
+                                 constraintName="fk_employee__service_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="team"
+                                 />
+    </changeSet>
+</databaseChangeLog>

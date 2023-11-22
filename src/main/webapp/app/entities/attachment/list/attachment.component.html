@@ -1,0 +1,127 @@
+<div>
+  <h2 id="page-heading" data-cy="AttachmentHeading">
+    <span jhiTranslate="singabsenceApp.attachment.home.title">Attachments</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="singabsenceApp.attachment.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-attachment"
+        [routerLink]="['/attachment/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="singabsenceApp.attachment.home.createLabel">Créer un nouveau Attachment</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="attachments?.length === 0">
+    <span jhiTranslate="singabsenceApp.attachment.home.notFound">Aucun Attachment trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="attachments && attachments.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.attachment.id">Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="name">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.attachment.name">Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="category">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.attachment.category">Category</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="picture">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.attachment.picture">Picture</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="document">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.attachment.document">Document</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="owner.id">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.attachment.owner">Owner</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let attachment of attachments; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/attachment', attachment.id, 'view']">{{ attachment.id }}</a>
+          </td>
+          <td>{{ attachment.name }}</td>
+          <td jhiTranslate="{{ 'singabsenceApp.TypeOfAttachment.' + attachment.category }}">{{ attachment.category }}</td>
+          <td>
+            <a *ngIf="attachment.picture" (click)="openFile(attachment.picture, attachment.pictureContentType)">
+              <img
+                [src]="'data:' + attachment.pictureContentType + ';base64,' + attachment.picture"
+                style="max-height: 30px"
+                alt="attachment image"
+              />
+            </a>
+            <span *ngIf="attachment.picture">{{ attachment.pictureContentType }}, {{ byteSize(attachment.picture) }}</span>
+          </td>
+          <td>
+            <a
+              *ngIf="attachment.document"
+              (click)="openFile(attachment.document, attachment.documentContentType)"
+              jhiTranslate="entity.action.open"
+              >Ouvrir</a
+            >
+            <span *ngIf="attachment.document">{{ attachment.documentContentType }}, {{ byteSize(attachment.document) }}</span>
+          </td>
+          <td>
+            <div *ngIf="attachment.owner">
+              <a [routerLink]="['/employee', attachment.owner.id, 'view']">{{ attachment.owner.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <a [routerLink]="['/attachment', attachment.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </a>
+
+              <a [routerLink]="['/attachment', attachment.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </a>
+
+              <button type="submit" (click)="delete(attachment)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

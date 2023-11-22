@@ -1,0 +1,9 @@
+{
+  "singabsenceApp": {
+    "TypeOfAttachment": {
+      "null": "",
+      "IMAGE": "Image .jpeg .png .jpg",
+      "DOCUMENT": "Document .pdf .docx .pptx"
+    }
+  }
+}

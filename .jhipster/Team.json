@@ -1,0 +1,57 @@
+{
+  "applications": ["singabsence"],
+  "changelogDate": "20231122072222",
+  "dto": "mapstruct",
+  "entityTableName": "team",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Team",
+  "relationships": [
+    {
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "ownteam",
+      "relationshipName": "lead",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "calendar",
+      "otherEntityRelationshipName": "ownteam",
+      "relationshipName": "planing",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "service",
+      "relationshipName": "ownmember",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "teams",
+      "relationshipName": "members",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "organization",
+      "otherEntityRelationshipName": "units",
+      "relationshipName": "organizations",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}
