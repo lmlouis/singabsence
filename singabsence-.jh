@@ -17,60 +17,54 @@ application {
 }
 
 enum LeaveStatus {
-  PENDING("En attente")
-  APPROVED("Approuvé")
-  REJECTED("Rejeté")
+    PENDING("En attente")
+    APPROVED("Approuvé")
+    REJECTED("Rejeté")
 }
-
 enum LeaveType {
-  PAID_LEAVE("Congé payé")
-  UNPAID_LEAVE("Congé sans solde")
-  ANNUAL_LEAVE("Congé annuel")
-  SICK_LEAVE("Congé de maladie")
-  MATERNITY_PATERNITY_LEAVE("Congé de maternité/paternité")
-  PARENTAL_LEAVE("Congé parental")
-  SABBATICAL_LEAVE("Congé sabbatique")
-  PROFESSIONAL_DEVELOPMENT_LEAVE("Congé de formation professionnelle")
-  BEREAVEMENT_LEAVE("Congé de deuil")
-  MARRIAGE_LEAVE("Congé de mariage")
-  MILITARY_SERVICE_LEAVE("Congé pour obligations militaires")
-  RELOCATION_LEAVE("Congé pour déménagement")
-  FAMILY_EVENTS_LEAVE("Congé pour événements familiaux")
-  BLOOD_DONATION_LEAVE("Congé pour don de sang")
-  GRIEF_LEAVE("Congé de deuil")
-  COMPENSATORY_LEAVE("Congé de récupération")
-  CIVIC_SERVICE_LEAVE("Congé pour service civique")
-  OTHER("Autre")
+    PAID_LEAVE("Congé payé")
+    UNPAID_LEAVE("Congé sans solde")
+    ANNUAL_LEAVE("Congé annuel")
+    SICK_LEAVE("Congé de maladie")
+    MATERNITY_PATERNITY_LEAVE("Congé de maternité/paternité")
+    PARENTAL_LEAVE("Congé parental")
+    SABBATICAL_LEAVE("Congé sabbatique")
+    PROFESSIONAL_DEVELOPMENT_LEAVE("Congé de formation professionnelle")
+    BEREAVEMENT_LEAVE("Congé de deuil")
+    MARRIAGE_LEAVE("Congé de mariage")
+    MILITARY_SERVICE_LEAVE("Congé pour obligations militaires")
+    RELOCATION_LEAVE("Congé pour déménagement")
+    FAMILY_EVENTS_LEAVE("Congé pour événements familiaux")
+    BLOOD_DONATION_LEAVE("Congé pour don de sang")
+    GRIEF_LEAVE("Congé de deuil")
+    COMPENSATORY_LEAVE("Congé de récupération")
+    CIVIC_SERVICE_LEAVE("Congé pour service civique")
+    OTHER("Autre")
 }
-
 entity Employee {
-  id Long
-  fullname String required
-  phone String required
-  position String required
-  location String required
-  birthday LocalDate required
+    id Long
+    fullname String required
+    phone String required
+    position String required
+    location String required
+    birthday LocalDate required
 }
-
 entity Team {
-  id Long
-  name String required
+    id Long
+    name String required
 }
-
 entity Leave {
-  id Long
-  type LeaveType required
-  reason String required
+    id Long
+    type LeaveType required
 }
 
 entity Message {
-  id Long
-  purpose String required
-  content String required
-  sentat Instant
-  isread Boolean
+    id Long
+    purpose String required
+    content String required
+    sentat Instant
+    isread Boolean
 }
-
 entity Attachment{
     id Long
     name String required
@@ -78,77 +72,67 @@ entity Attachment{
     picture ImageBlob
     document AnyBlob
 }
-
-enum TypeOfAttachment{
-    IMAGE("Image .jpeg .png .jpg"),
+enum TypeOfAttachment {
+    IMAGE("Image .jpeg .png .jpg")
     DOCUMENT("Document .pdf .docx .pptx")
 }
-
 entity Calendar {
-  id Long
-  title String
-  summury String
-  createdat Instant
+    id Long
+    title String
+    summury String
+    createdat Instant
 }
-
 entity Workflow {
-  id Long
-  status LeaveStatus required
-  validation String
-  description String required
-  state Integer
-  label String
+    id Long
+    status LeaveStatus required
+    description String required
 }
-
 entity Event {
-  id Long
-  title String required
-  start Instant required
-  end Instant required
-  link String
+    id Long
+    title String required
+    start Instant required
+    end Instant required
+    link String
 }
-
 entity Organization {
     id Long
     name String  required
     logo ImageBlob
     website String
-    domain  String required
+    domain String required
     phone String
 }
-
 relationship OneToOne {
-  Employee{authenticateby(login)} to User with builtInEntity
-  Employee{calendar} to Calendar{owner}
-  Organization{director} to Employee{ownenterprise}
-  Team{lead} to Employee{ownteam}
-  Message{from} to Employee{ownmessage}
-  Team{planing} to Calendar{ownteam}
+    Employee{authenticateby(login)} to User with builtInEntity
+    Employee{calendar} to Calendar{owner}
+    Organization{director} to Employee{ownenterprise}
+    Team{lead} to Employee{ownteam}
+    Message{from} to Employee{ownmessage}
+    Team{planing} to Calendar{ownteam}
+    Leave{owner} to Employee{request}
 }
 
 
 relationship ManyToOne {
-  Leave{workflow} to Workflow{ownrequests}
-  Leave{attachment} to Attachment{leaverequest}
-  Leave{sentto} to Employee{request}
+    Leave{workflow} to Workflow{ownrequests}
+    Leave{reason} to Message{oneleave}
+    Leave{period} to Event{oneleave}
+    Workflow{validation} to Message{ownworkflow}
+    Workflow{request} to Leave{ownworkflow}
 }
-
 relationship OneToMany{
-  Employee{attachments} to Attachment{owner}
-  Employee{createdevents} to Event{creator}
-  Team{ownmember} to Employee{service}
+    Employee{attachments} to Attachment{owner}
+    Employee{createdevents} to Event{creator}
+    Team{ownmember} to Employee{service}
 }
-
-
 relationship ManyToMany {
-  Organization{units} to Team{organizations}
-  Message{attachements} to Attachment{msg}
-  Employee{leaves} to Leave{requestedby}
-  Message{to} to Employee{inbox}
-  Calendar{events} to Event{owncalendar}
-  Team{members} to Employee{teams}
+    Organization{units} to Team{organizations}
+    Message{attachements} to Attachment{msg}
+    Employee{leaves} to Leave{requestedby}
+    Message{to} to Employee{inbox}
+    Calendar{events} to Event{owncalendar}
+    Team{members} to Employee{teams}
+    Leave{sentto} to Employee{requests}
 }
-
-
 dto * with mapstruct
 service * with serviceImpl
