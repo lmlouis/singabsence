@@ -1,0 +1,106 @@
+<div>
+  <h2 id="page-heading" data-cy="WorkflowHeading">
+    <span jhiTranslate="singabsenceApp.workflow.home.title">Workflows</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="singabsenceApp.workflow.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-workflow"
+        [routerLink]="['/workflow/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="singabsenceApp.workflow.home.createLabel">Créer un nouveau Workflow</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="workflows?.length === 0">
+    <span jhiTranslate="singabsenceApp.workflow.home.notFound">Aucun Workflow trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="workflows && workflows.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.workflow.id">Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.workflow.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="validation">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.workflow.validation">Validation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.workflow.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="state">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.workflow.state">State</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="label">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.workflow.label">Label</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let workflow of workflows; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/workflow', workflow.id, 'view']">{{ workflow.id }}</a>
+          </td>
+          <td jhiTranslate="{{ 'singabsenceApp.LeaveStatus.' + workflow.status }}">{{ workflow.status }}</td>
+          <td>{{ workflow.validation }}</td>
+          <td>{{ workflow.description }}</td>
+          <td>{{ workflow.state }}</td>
+          <td>{{ workflow.label }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <a [routerLink]="['/workflow', workflow.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </a>
+
+              <a [routerLink]="['/workflow', workflow.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </a>
+
+              <button type="submit" (click)="delete(workflow)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

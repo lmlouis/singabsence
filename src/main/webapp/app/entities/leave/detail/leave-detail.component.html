@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="leave">
+      <h2 data-cy="leaveDetailsHeading"><span jhiTranslate="singabsenceApp.leave.detail.title">Leave</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="singabsenceApp.leave.id">Id</span></dt>
+        <dd>
+          <span>{{ leave.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.leave.type">Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'singabsenceApp.LeaveType.' + leave.type }}">{{ leave.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.leave.reason">Reason</span></dt>
+        <dd>
+          <span>{{ leave.reason }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.leave.workflow">Workflow</span></dt>
+        <dd>
+          <div *ngIf="leave.workflow">
+            <a [routerLink]="['/workflow', leave.workflow.id, 'view']">{{ leave.workflow.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.leave.attachment">Attachment</span></dt>
+        <dd>
+          <div *ngIf="leave.attachment">
+            <a [routerLink]="['/attachment', leave.attachment.id, 'view']">{{ leave.attachment.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.leave.sentto">Sentto</span></dt>
+        <dd>
+          <div *ngIf="leave.sentto">
+            <a [routerLink]="['/employee', leave.sentto.id, 'view']">{{ leave.sentto.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/leave', leave.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

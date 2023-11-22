@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="event">
+      <h2 data-cy="eventDetailsHeading"><span jhiTranslate="singabsenceApp.event.detail.title">Event</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="singabsenceApp.event.id">Id</span></dt>
+        <dd>
+          <span>{{ event.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.event.title">Title</span></dt>
+        <dd>
+          <span>{{ event.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.event.start">Start</span></dt>
+        <dd>
+          <span>{{ event.start | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.event.end">End</span></dt>
+        <dd>
+          <span>{{ event.end | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.event.link">Link</span></dt>
+        <dd>
+          <span>{{ event.link }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.event.creator">Creator</span></dt>
+        <dd>
+          <div *ngIf="event.creator">
+            <a [routerLink]="['/employee', event.creator.id, 'view']">{{ event.creator.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/event', event.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

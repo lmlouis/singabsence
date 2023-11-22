@@ -1,0 +1,29 @@
+{
+  "singabsenceApp": {
+    "calendar": {
+      "home": {
+        "title": "Calendars",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Calendar",
+        "createOrEditLabel": "Create or edit a Calendar",
+        "notFound": "No Calendars found"
+      },
+      "created": "A new Calendar is created with identifier {{ param }}",
+      "updated": "A Calendar is updated with identifier {{ param }}",
+      "deleted": "A Calendar is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Calendar {{ id }}?"
+      },
+      "detail": {
+        "title": "Calendar"
+      },
+      "id": "Id",
+      "title": "Title",
+      "summury": "Summury",
+      "createdat": "Createdat",
+      "events": "Events",
+      "owner": "Owner",
+      "ownteam": "Ownteam"
+    }
+  }
+}

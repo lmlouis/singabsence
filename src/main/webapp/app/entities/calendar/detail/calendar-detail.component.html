@@ -1,0 +1,47 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="calendar">
+      <h2 data-cy="calendarDetailsHeading"><span jhiTranslate="singabsenceApp.calendar.detail.title">Calendar</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="singabsenceApp.calendar.id">Id</span></dt>
+        <dd>
+          <span>{{ calendar.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.calendar.title">Title</span></dt>
+        <dd>
+          <span>{{ calendar.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.calendar.summury">Summury</span></dt>
+        <dd>
+          <span>{{ calendar.summury }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.calendar.createdat">Createdat</span></dt>
+        <dd>
+          <span>{{ calendar.createdat | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.calendar.events">Events</span></dt>
+        <dd>
+          <span *ngFor="let events of calendar.events; let last = last">
+            <a [routerLink]="['/event', events.id, 'view']">{{ events.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/calendar', calendar.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

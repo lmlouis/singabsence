@@ -1,0 +1,10 @@
+{
+  "singabsenceApp": {
+    "LeaveStatus": {
+      "null": "",
+      "PENDING": "En attente",
+      "APPROVED": "Approuvé",
+      "REJECTED": "Rejeté"
+    }
+  }
+}

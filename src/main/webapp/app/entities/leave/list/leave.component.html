@@ -1,0 +1,118 @@
+<div>
+  <h2 id="page-heading" data-cy="LeaveHeading">
+    <span jhiTranslate="singabsenceApp.leave.home.title">Leaves</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="singabsenceApp.leave.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-leave"
+        [routerLink]="['/leave/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="singabsenceApp.leave.home.createLabel">Créer un nouveau Leave</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="leaves?.length === 0">
+    <span jhiTranslate="singabsenceApp.leave.home.notFound">Aucun Leave trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="leaves && leaves.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.leave.id">Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="type">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.leave.type">Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="reason">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.leave.reason">Reason</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="workflow.id">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.leave.workflow">Workflow</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="attachment.id">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.leave.attachment">Attachment</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sentto.id">
+            <div class="d-flex">
+              <span jhiTranslate="singabsenceApp.leave.sentto">Sentto</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let leave of leaves; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/leave', leave.id, 'view']">{{ leave.id }}</a>
+          </td>
+          <td jhiTranslate="{{ 'singabsenceApp.LeaveType.' + leave.type }}">{{ leave.type }}</td>
+          <td>{{ leave.reason }}</td>
+          <td>
+            <div *ngIf="leave.workflow">
+              <a [routerLink]="['/workflow', leave.workflow.id, 'view']">{{ leave.workflow.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="leave.attachment">
+              <a [routerLink]="['/attachment', leave.attachment.id, 'view']">{{ leave.attachment.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="leave.sentto">
+              <a [routerLink]="['/employee', leave.sentto.id, 'view']">{{ leave.sentto.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <a [routerLink]="['/leave', leave.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </a>
+
+              <a [routerLink]="['/leave', leave.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </a>
+
+              <button type="submit" (click)="delete(leave)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
