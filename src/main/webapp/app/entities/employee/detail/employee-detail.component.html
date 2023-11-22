@@ -1,0 +1,71 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="employee">
+      <h2 data-cy="employeeDetailsHeading"><span jhiTranslate="singabsenceApp.employee.detail.title">Employee</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="singabsenceApp.employee.id">Id</span></dt>
+        <dd>
+          <span>{{ employee.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.employee.fullname">Fullname</span></dt>
+        <dd>
+          <span>{{ employee.fullname }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.employee.phone">Phone</span></dt>
+        <dd>
+          <span>{{ employee.phone }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.employee.position">Position</span></dt>
+        <dd>
+          <span>{{ employee.position }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.employee.location">Location</span></dt>
+        <dd>
+          <span>{{ employee.location }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.employee.birthday">Birthday</span></dt>
+        <dd>
+          <span>{{ employee.birthday | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.employee.authenticateby">Authenticateby</span></dt>
+        <dd>
+          <span>{{ employee.authenticateby?.login }}</span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.employee.calendar">Calendar</span></dt>
+        <dd>
+          <div *ngIf="employee.calendar">
+            <a [routerLink]="['/calendar', employee.calendar.id, 'view']">{{ employee.calendar.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.employee.leaves">Leaves</span></dt>
+        <dd>
+          <span *ngFor="let leaves of employee.leaves; let last = last">
+            <a [routerLink]="['/leave', leaves.id, 'view']">{{ leaves.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="singabsenceApp.employee.service">Service</span></dt>
+        <dd>
+          <div *ngIf="employee.service">
+            <a [routerLink]="['/team', employee.service.id, 'view']">{{ employee.service.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/employee', employee.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,116 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-event-heading" data-cy="EventCreateUpdateHeading" jhiTranslate="singabsenceApp.event.home.createOrEditLabel">
+        Créer ou éditer un Event
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="singabsenceApp.event.id" for="field_id">Id</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="singabsenceApp.event.title" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+          <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('title')?.errors?.required" jhiTranslate="entity.validation.required"
+              >Ce champ est obligatoire.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="singabsenceApp.event.start" for="field_start">Start</label>
+          <div class="d-flex">
+            <input
+              id="field_start"
+              data-cy="start"
+              type="datetime-local"
+              class="form-control"
+              name="start"
+              formControlName="start"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('start')!.invalid && (editForm.get('start')!.dirty || editForm.get('start')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('start')?.errors?.required" jhiTranslate="entity.validation.required"
+              >Ce champ est obligatoire.</small
+            >
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('start')?.errors?.datetimelocal"
+              jhiTranslate="entity.validation.datetimelocal"
+              >Ce champ doit être une date et une heure.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="singabsenceApp.event.end" for="field_end">End</label>
+          <div class="d-flex">
+            <input
+              id="field_end"
+              data-cy="end"
+              type="datetime-local"
+              class="form-control"
+              name="end"
+              formControlName="end"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('end')!.invalid && (editForm.get('end')!.dirty || editForm.get('end')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('end')?.errors?.required" jhiTranslate="entity.validation.required"
+              >Ce champ est obligatoire.</small
+            >
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('end')?.errors?.datetimelocal"
+              jhiTranslate="entity.validation.datetimelocal"
+              >Ce champ doit être une date et une heure.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="singabsenceApp.event.link" for="field_link">Link</label>
+          <input type="text" class="form-control" name="link" id="field_link" data-cy="link" formControlName="link" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="singabsenceApp.event.creator" for="field_creator">Creator</label>
+          <select
+            class="form-control"
+            id="field_creator"
+            data-cy="creator"
+            name="creator"
+            formControlName="creator"
+            [compareWith]="compareEmployee"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="employeeOption" *ngFor="let employeeOption of employeesSharedCollection">{{ employeeOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

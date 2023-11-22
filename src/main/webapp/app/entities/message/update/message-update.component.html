@@ -1,0 +1,114 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-message-heading" data-cy="MessageCreateUpdateHeading" jhiTranslate="singabsenceApp.message.home.createOrEditLabel">
+        Créer ou éditer un Message
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="singabsenceApp.message.id" for="field_id">Id</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="singabsenceApp.message.purpose" for="field_purpose">Purpose</label>
+          <input type="text" class="form-control" name="purpose" id="field_purpose" data-cy="purpose" formControlName="purpose" />
+          <div *ngIf="editForm.get('purpose')!.invalid && (editForm.get('purpose')!.dirty || editForm.get('purpose')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('purpose')?.errors?.required" jhiTranslate="entity.validation.required"
+              >Ce champ est obligatoire.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="singabsenceApp.message.content" for="field_content">Content</label>
+          <input type="text" class="form-control" name="content" id="field_content" data-cy="content" formControlName="content" />
+          <div *ngIf="editForm.get('content')!.invalid && (editForm.get('content')!.dirty || editForm.get('content')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('content')?.errors?.required" jhiTranslate="entity.validation.required"
+              >Ce champ est obligatoire.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="singabsenceApp.message.sentat" for="field_sentat">Sentat</label>
+          <div class="d-flex">
+            <input
+              id="field_sentat"
+              data-cy="sentat"
+              type="datetime-local"
+              class="form-control"
+              name="sentat"
+              formControlName="sentat"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="singabsenceApp.message.isread" for="field_isread">Isread</label>
+          <input type="checkbox" class="form-check" name="isread" id="field_isread" data-cy="isread" formControlName="isread" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="singabsenceApp.message.from" for="field_from">From</label>
+          <select class="form-control" id="field_from" data-cy="from" name="from" formControlName="from" [compareWith]="compareEmployee">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="employeeOption" *ngFor="let employeeOption of fromsCollection">{{ employeeOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label jhiTranslate="singabsenceApp.message.attachements" for="field_attachements">Attachements</label>
+          <select
+            class="form-control"
+            id="field_attachements"
+            data-cy="attachements"
+            multiple
+            name="attachements"
+            formControlName="attachements"
+            [compareWith]="compareAttachment"
+          >
+            <option [ngValue]="attachmentOption" *ngFor="let attachmentOption of attachmentsSharedCollection">
+              {{ attachmentOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label jhiTranslate="singabsenceApp.message.to" for="field_tos">To</label>
+          <select
+            class="form-control"
+            id="field_tos"
+            data-cy="to"
+            multiple
+            name="tos"
+            formControlName="tos"
+            [compareWith]="compareEmployee"
+          >
+            <option [ngValue]="employeeOption" *ngFor="let employeeOption of employeesSharedCollection">{{ employeeOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 0,
+    "applicationType": "monolith",
+    "authenticationType": "jwt",
+    "baseName": "singabsence",
+    "buildTool": "maven",
+    "clientFramework": "angular",
+    "clientTheme": "none",
+    "devDatabaseType": "postgresql",
+    "devServerPort": 4200,
+    "entities": ["Employee", "Team", "Leave", "Message", "Attachment", "Calendar", "Workflow", "Event", "Organization"],
+    "jhipsterVersion": "8.0.0",
+    "jwtSecretKey": "N2ZiMjVlNmVkN2EzZDVmMzYwMjA4M2IwYjc2ZmIzNWEwZTY3NWZlN2Y4NWZmM2EzYjdlZDI5YWIyN2I4ZGZiYTE2OGFjNzZkODI2MmNlZTdhNDMyNGRiZTdkMzMwOTkwZWQ0NGM1NDQxYTI2MzA4ZTNhM2JhZGJiMWNhMzE5NGM=",
+    "languages": ["fr", "en"],
+    "lastLiquibaseTimestamp": 1700612189000,
+    "nativeLanguage": "fr",
+    "packageFolder": "com/sing/singabsence",
+    "packageName": "com.sing.singabsence",
+    "prodDatabaseType": "postgresql",
+    "websocket": "spring-websocket"
+  }
+}
