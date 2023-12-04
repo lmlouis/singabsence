@@ -43,7 +43,7 @@
     },
     "form": {
       "username.label": "Nom d'utilisateur",
-      "username.placeholder": "Votre nom d'utilisateur",
+      "username.placeholder": "Authentifiant",
       "currentpassword.label": "Mot de passe actuel",
       "currentpassword.placeholder": "Mot de passe actuel",
       "newpassword.label": "Nouveau mot de passe",
@@ -62,7 +62,7 @@
         },
         "register": {
           "noaccount": "Vous n'avez pas encore de compte ?",
-          "link": "Créer un compte"
+          "link": "S'inscrire maintenant"
         }
       },
       "error": {

@@ -2,7 +2,15 @@
 @import 'bootstrap/scss/functions';
 @import 'bootstrap/scss/variables';
 @import 'colors.scss';
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
@@ -13,13 +21,61 @@ h2,
 h3,
 h4 {
   font-weight: 300;
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
 }
 
+.label-text {
+  margin: 8px 0;
+  color: var(--turquoise-turquoise, var(--Turquoise-100, #00758d));
+  /* Text / base / normal-400 */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+}
+
+// ------------------ Input text --------------------------- //
+.input {
+  // border: none !important;
+  border-radius: 4px;
+  border: 1px solid var(--input-style-type-text-border-color);
+  background: var(--grey-blue) !important;
+  padding-left: 35px;
+  caret-color: var(--input-style-type-text-caret-color); /* couleur du curseur */
+  /* Layout Heading 21 */
+  font-family: Inter;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 28px; /* 140% */
+}
+
+.input::placeholder {
+  color: var(--black-43);
+}
+
+.input:hover, /* Au survol */
+.input:focus, /* Lorsqu'il ya le curseur */
+.input:not(:placeholder-shown)  /* Lorsque le champ n'est pas vide */ {
+  outline: var(--input-style-type-text-selected-outline-color); /* bordure de selection du curseur */
+  color: var(--input-style-type-text-selected-color);
+  border: 1px solid var(--input-style-type-text-selected-border-color) !important;
+}
+
+// ------------------ Input text --------------------------- //
+body {
+  color: var(--black43percent, rgba(29, 29, 27, 0.43));
+}
 /* Increase contrast of links to get 100% on Lighthouse Accessability Audit. Override this color if you want to change the link color, or use a Bootswatch theme */
 a {
-  color: #00758d;
-  font-weight: bold;
+  text-decoration: none;
+  /* Layout Heading 16 */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 }
 
 a:hover {
@@ -50,8 +106,8 @@ Browser Upgrade Prompt
 ========================================================================== */
 .browserupgrade {
   margin: 0.2em 0;
-  background: #ccc;
-  color: #1d1d1b;
+  background: var(--grey-blue);
+  color: var(--Turquoise-100);
   padding: 0.2em 0;
 }
 
