@@ -103,7 +103,7 @@ entity Organization {
     phone String
 }
 relationship OneToOne {
-    Employee{authenticateby(login)} to User with builtInEntity
+    Employee{authenticateby(login)} to User// with builtInEntity
     Employee{calendar} to Calendar{owner}
     Organization{director} to Employee{ownenterprise}
     Team{lead} to Employee{ownteam}

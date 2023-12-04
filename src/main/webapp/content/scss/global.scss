@@ -12,16 +12,17 @@ h2,
 h3,
 h4 {
   font-weight: 300;
+  font-family: 'Inter';
 }
 
 /* Increase contrast of links to get 100% on Lighthouse Accessability Audit. Override this color if you want to change the link color, or use a Bootswatch theme */
 a {
-  color: #533f03;
+  color: #00758d;
   font-weight: bold;
 }
 
 a:hover {
-  color: #533f03;
+  color: #00758d80;
 }
 
 /* override hover color for dropdown-item forced by bootstrap to all a:not([href]):not([tabindex]) elements in _reboot.scss */
@@ -49,7 +50,7 @@ Browser Upgrade Prompt
 .browserupgrade {
   margin: 0.2em 0;
   background: #ccc;
-  color: #000;
+  color: #1d1d1b;
   padding: 0.2em 0;
 }
 
@@ -60,11 +61,11 @@ Generic styles
 /* Error highlight on input fields */
 .ng-valid[required],
 .ng-valid.required {
-  border-left: 5px solid green;
+  border-left: 5px solid #00758d;
 }
 
 .ng-invalid:not(form) {
-  border-left: 5px solid red;
+  border-left: 5px solid #8e0b56;
 }
 
 /* other generic styles */
@@ -77,7 +78,7 @@ Generic styles
 
 .error {
   color: white;
-  background-color: red;
+  background-color: #8e0b56;
 }
 
 .pad {
