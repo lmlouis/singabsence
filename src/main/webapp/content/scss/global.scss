@@ -15,20 +15,27 @@
 Bootstrap tweaks
 ===============================================================*/
 
-body,
+body {
+  font-weight: 300;
+  font-family: var(--font-family-sans-serif);
+  color: var(--gray);
+}
+
 h1,
 h2,
 h3,
 h4 {
-  font-weight: 300;
-  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-family: var(--font-family-sans-serif);
+  color: #00758d;
 }
-
-.label-text {
+#rememberMelabel {
+  color: var(--black43percent) !important;
+}
+label {
   margin: 8px 0;
   color: var(--turquoise-turquoise, var(--Turquoise-100, #00758d));
   /* Text / base / normal-400 */
-  font-family: Inter;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -36,46 +43,41 @@ h4 {
 }
 
 // ------------------ Input text --------------------------- //
-.input {
-  // border: none !important;
-  border-radius: 4px;
-  border: 1px solid var(--input-style-type-text-border-color);
-  background: var(--grey-blue) !important;
-  padding-left: 35px;
-  caret-color: var(--input-style-type-text-caret-color); /* couleur du curseur */
-  /* Layout Heading 21 */
-  font-family: Inter;
-  font-size: 16px !important;
-  font-style: normal !important;
-  font-weight: 400 !important;
-  line-height: 28px; /* 140% */
-}
+// .input {
+//   // border: none !important;
+//   border-radius: 4px;
+//   border: 1px solid var(--input-style-type-text-border-color);
+//   background: var(--grey-blue) !important;
+//   padding-left: 35px;
+//   caret-color: var(--input-style-type-text-caret-color); /* couleur du curseur */
+//   /* Layout Heading 21 */
+//   font-size: 16px !important;
+//   font-style: normal !important;
+//   font-weight: 400 !important;
+//   line-height: 28px; /* 140% */
+// }
 
-.input::placeholder {
-  color: var(--black-43);
-}
+// .input::placeholder {
+//   color: var(--black-43);
+// }
 
-.input:hover, /* Au survol */
-.input:focus, /* Lorsqu'il ya le curseur */
-.input:not(:placeholder-shown)  /* Lorsque le champ n'est pas vide */ {
-  outline: var(--input-style-type-text-selected-outline-color); /* bordure de selection du curseur */
-  color: var(--input-style-type-text-selected-color);
-  border: 1px solid var(--input-style-type-text-selected-border-color) !important;
-}
+// .input:hover, /* Au survol */
+// .input:focus, /* Lorsqu'il ya le curseur */
+// .input:not(:placeholder-shown)  /* Lorsque le champ n'est pas vide */ {
+//   outline: var(--input-style-type-text-selected-outline-color); /* bordure de selection du curseur */
+//   color: var(--input-style-type-text-selected-color);
+//   border: 1px solid var(--input-style-type-text-selected-border-color) !important;
+// }
 
-// ------------------ Input text --------------------------- //
-body {
-  color: var(--black43percent, rgba(29, 29, 27, 0.43));
-}
 /* Increase contrast of links to get 100% on Lighthouse Accessability Audit. Override this color if you want to change the link color, or use a Bootswatch theme */
 a {
   text-decoration: none;
   /* Layout Heading 16 */
-  font-family: Inter;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 24px; /* 150% */
+  color: #00758d;
 }
 
 a:hover {
@@ -134,8 +136,8 @@ Generic styles
 }
 
 .error {
-  color: white;
-  background-color: #8e0b56;
+  color: #8e0b56;
+  background-color: white;
 }
 
 .pad {
@@ -156,11 +158,33 @@ Generic styles
 }
 
 .form-control {
-  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid var(--input-style-type-text-border-color);
+  background: var(--grey-blue) !important;
+  padding-left: 35px;
+  caret-color: var(--input-style-type-text-caret-color); /* couleur du curseur */
+  /* Layout Heading 21 */
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 28px; /* 140% */
+}
+
+.form-control::placeholder {
+  color: var(--black-43);
+}
+
+.form-control:hover, /* Au survol */
+.form-control:focus, /* Lorsqu'il ya le curseur */
+.form-control:not(:placeholder-shown)  /* Lorsque le champ n'est pas vide */ {
+  outline: var(--input-style-type-text-selected-outline-color); /* bordure de selection du curseur */
+  color: var(--input-style-type-text-selected-color);
+  background-color: var(--grey-blue);
+  border: 1px solid var(--input-style-type-text-selected-border-color) !important;
 }
 
 .readonly {
-  background-color: #eee;
+  background-color: #f8fafc;
   opacity: 1;
 }
 

@@ -7,12 +7,13 @@
 
 // Colors:
 // Grayscale and brand colors for use across Bootstrap.
+@import './colors.scss';
 
 $primary: #00758d;
-$success: #00758d;
-$info: rgba(29, 29, 27, 0.43);
-$warning: #fa0a93;
-$danger: #8e0b56;
+$success: white;
+$info: white;
+$warning: white;
+$danger: white;
 
 // Options:
 // Quickly modify global styling by enabling or disabling optional features.
@@ -41,5 +42,5 @@ $body-bg: #f8fafc;
 
 $font-size-base: 1rem;
 
-$dropdown-link-hover-color: #f8fafc;
+$dropdown-link-hover-color: white;
 $dropdown-link-hover-bg: #00758d;

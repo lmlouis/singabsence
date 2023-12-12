@@ -6,6 +6,7 @@ eg $input-color: red;
 ****************************/
 // Override Bootstrap variables
 @import 'bootstrap-variables';
+@import './colors.scss';
 // Import Bootstrap source files from node_modules
 @import 'bootstrap/scss/bootstrap';
 

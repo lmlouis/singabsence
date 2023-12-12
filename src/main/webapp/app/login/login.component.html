@@ -45,16 +45,18 @@
         />
       </div>
       <div class="info-link space-between-item">
-        <div class="link-item form-check">
+        <div class="form-check">
           <label class="form-check-label" for="rememberMe">
             <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" formControlName="rememberMe" />
-            <span class="label" jhiTranslate="login.form.rememberme">Se souvenir de moi ?</span>
+            <span id="rememberMelabel" jhiTranslate="login.form.rememberme">Se souvenir de moi ?</span>
           </label>
         </div>
-        <div class="link-item">
-          <a class="link" routerLink="/account/reset/request" jhiTranslate="login.password.forgot" data-cy="forgetYourPasswordSelector"
-            >Mot de passe oublié ?</a
-          >
+        <div class="form-check">
+          <label class="form-check-label">
+            <a routerLink="/account/reset/request" jhiTranslate="login.password.forgot" data-cy="forgetYourPasswordSelector"
+              >Mot de passe oublié ?</a
+            >
+          </label>
         </div>
       </div>
       <button type="submit" class="space-between-item button btn btn-primary" jhiTranslate="login.form.button" data-cy="submit">

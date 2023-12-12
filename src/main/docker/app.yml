@@ -27,3 +27,7 @@ services:
     extends:
       file: ./postgresql.yml
       service: postgresql
+  smtp4dev:
+    extends:
+      file: ./fake-email-sandbox.yml
+      service: mail-server

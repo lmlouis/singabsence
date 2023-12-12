@@ -1,15 +1,39 @@
 :root {
-  --grey-blue: #f8fafc;
-  --black-43: rgba(29, 29, 27, 0.43);
-  --turquoise-50: rgba(0, 117, 141, 0.5);
-  --Turquoise-100: #00758d;
+  --grey-blue: #f8fafc !important;
+  --black-43: rgba(29, 29, 27, 0.43) !important;
+  --turquoise-50: rgba(0, 117, 141, 0.5) !important;
+  --Turquoise-100: #00758d !important;
   /* Input type Text Colors */
-  --input-style-type-text-border-color: var(--grey-blue);
-  --input-style-type-text-background-color: var(--grey-blue);
-  --input-style-type-text-caret-color: var(--black-43);
-  --input-style-type-text-selected-outline-color: var(--turquoise-50, rgba(0, 117, 141, 0.5));
-  --input-style-type-text-selected-color: var(--turquoise-50, rgba(0, 117, 141, 0.5));
-  --input-style-type-text-selected-border-color: var(--turquoise-50, rgba(0, 117, 141, 0.5));
+  --input-style-type-text-border-color: var(--grey-blue) !important;
+  --input-style-type-text-background-color: var(--grey-blue) !important;
+  --input-style-type-text-caret-color: var(--black-43) !important;
+  --input-style-type-text-selected-outline-color: var(--turquoise-50, rgba(0, 117, 141, 0.5)) !important;
+  --input-style-type-text-selected-color: var(--turquoise-50, rgba(0, 117, 141, 0.5)) !important;
+  --input-style-type-text-selected-border-color: var(--turquoise-50, rgba(0, 117, 141, 0.5)) !important;
   /* Label colors */
-  --input-label-typography-color: var(--turquoise-turquoise, var(--Turquoise-100, #00758d));
+  --input-label-typography-color: var(--turquoise-turquoise, var(--Turquoise-100, #00758d)) !important;
+  // _variables.scss
+  --blue: #f8fafc !important;
+  --pink: #fa0a93 !important;
+  --red: #8e0b56 !important;
+  --yellow: #dfc32d !important;
+  --green: #00758d !important;
+  --white: #00758d !important;
+  --gray: #1d1d1b6e !important;
+  --gray-dark: #1d1d1b !important;
+  --primary: #00758d !important;
+  --secondary: #00758d !important;
+  --success: white !important;
+  --info: white !important;
+  --warning: white !important;
+  --danger: white !important;
+  --light: white !important;
+  --dark: white !important;
+  --breakpoint-xs: 0 !important;
+  --breakpoint-sm: 576px !important;
+  --breakpoint-md: 768px !important;
+  --breakpoint-lg: 992px !important;
+  --breakpoint-xl: 1200px !important;
+  --font-family-sans-serif: 'Inter', sans-serif !important;
+  --font-family-monospace: 'Inter', monospace !important;
 }

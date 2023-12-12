@@ -1,10 +1,8 @@
-
-  ${AnsiColor.GREEN}      ██╗${AnsiColor.RED} ██╗   ██╗ ████████╗ ███████╗   ██████╗ ████████╗ ████████╗ ███████╗
-  ${AnsiColor.GREEN}      ██║${AnsiColor.RED} ██║   ██║ ╚══██╔══╝ ██╔═══██╗ ██╔════╝ ╚══██╔══╝ ██╔═════╝ ██╔═══██╗
-  ${AnsiColor.GREEN}      ██║${AnsiColor.RED} ████████║    ██║    ███████╔╝ ╚█████╗     ██║    ██████╗   ███████╔╝
-  ${AnsiColor.GREEN}██╗   ██║${AnsiColor.RED} ██╔═══██║    ██║    ██╔════╝   ╚═══██╗    ██║    ██╔═══╝   ██╔══██║
-  ${AnsiColor.GREEN}╚██████╔╝${AnsiColor.RED} ██║   ██║ ████████╗ ██║       ██████╔╝    ██║    ████████╗ ██║  ╚██╗
-  ${AnsiColor.GREEN} ╚═════╝ ${AnsiColor.RED} ╚═╝   ╚═╝ ╚═══════╝ ╚═╝       ╚═════╝     ╚═╝    ╚═══════╝ ╚═╝   ╚═╝
-
-${AnsiColor.BRIGHT_BLUE}:: JHipster 🤓  :: Running Spring Boot ${spring-boot.version} :: Startup profile(s) ${spring.profiles.active} ::
-:: https://www.jhipster.tech ::${AnsiColor.DEFAULT}
+ ${AnsiColor.MAGENTA}███████╗██╗███╗   ██╗ ██████╗ ${AnsiColor.BRIGHT_BLUE} █████╗ ██████╗ ███████╗███████╗███╗   ██╗ ██████╗███████╗
+ ${AnsiColor.MAGENTA}██╔════╝██║████╗  ██║██╔════╝ ${AnsiColor.BRIGHT_BLUE}██╔══██╗██╔══██╗██╔════╝██╔════╝████╗  ██║██╔════╝██╔════╝
+ ${AnsiColor.MAGENTA}███████╗██║██╔██╗ ██║██║  ███╗${AnsiColor.BRIGHT_BLUE}███████║██████╔╝███████╗█████╗  ██╔██╗ ██║██║     █████╗
+ ${AnsiColor.MAGENTA}╚════██║██║██║╚██╗██║██║   ██║${AnsiColor.BRIGHT_BLUE}██╔══██║██╔══██╗╚════██║██╔══╝  ██║╚██╗██║██║     ██╔══╝
+ ${AnsiColor.MAGENTA}███████║██║██║ ╚████║╚██████╔╝${AnsiColor.BRIGHT_BLUE}██║  ██║██████╔╝███████║███████╗██║ ╚████║╚██████╗███████╗
+ ${AnsiColor.MAGENTA}╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝ ${AnsiColor.BRIGHT_BLUE}╚═╝  ╚═╝╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═══╝ ╚═════╝╚══════╝
+ ${AnsiColor.BRIGHT_BLUE}:: Sing Absence 🤓  :: Running Spring Boot ${spring-boot.version} :: Startup profile(s) ${spring.profiles.active} ::
+:: developped by lmlouis  https://github.com/lmlouis ::${AnsiColor.DEFAULT}
