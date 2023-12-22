@@ -4,40 +4,47 @@ Application de gestion des demandes d'absences de la SING SA.
 
 ## Dépendences
 
-* maven          : version ``3.8.7 || latest lts``
-* java           : version ``17 || latest lts``
-* node           : version ``v20.10.0 || latest lts`` 
-* npm            : version ``10.2.5 || latest lts``
-* angular        : version ```17 || latest lts```
-* docker         : version ``24.0.7 || latest lts``
-* docker-compose : version ``v2.23.3 || latest lts``
+* **maven**          : version ``3.8.7 || latest lts``
+* **java**           : version ``17 || latest lts``
+* **node**           : version ``v20.10.0 || latest lts`` 
+* **npm**            : version ``10.2.5 || latest lts``
+* **angular**        : version ```17 || latest lts```
+* **docker**         : version ``24.0.7 || latest lts``
+* **docker-compose** : version ``v2.23.3 || latest lts``
+## Gestion du projet 
+
+Suivez les étapes du projet sur github : 
+[projet singabsence](https://github.com/users/lmlouis/projects/3/views/1)
 
 ## Structure du projet
 
 Le projet a été généré avec jhipster voir la pull request 1 : [https://github.com/lmlouis/singabsence/pull/1](https://github.com/lmlouis/singabsence/pull/1)
-Installer jhipster :
+
+**Installer jhipster** :
 ````
 npm install -g generator-jhipster
 npm ls -g generator-jhipster
 ````
 ## Exécuter le projet en mode développement
 
-installer les dépendances du projet
+installer les **dépendances du projet**
 
 ```
 npm install
 ```
-Exécuter ./mvnw dans un terminale et npm start  dans un autre
+Exécuter **./mvnw dans un terminale** et **npm start  dans un autre**
 ```
 ./mvnw
 npm start
 ```
 
+Naviguer [http://localhost:8080](http://localhost:8080) dans le navigateur pour le projet backend.
+Naviguer [http://localhost:9200](http://localhost:9200) dans le navigateur pour le projet frontend.
 ## Building for production
 
 ### Packaging as jar
 
-Construire l'application en mode production:
+Construire l'*application en mode production*:
 
 ```
 ./mvnw -Pprod clean verify
@@ -49,7 +56,7 @@ Ensuite exécuter :
 java -jar target/*.jar
 ```
 
-Then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
+Naviguer [http://localhost:8080](http://localhost:8080) dans le navigateur pour le projet backend.
 
 
 ### Packaging as war
