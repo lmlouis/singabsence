@@ -1,0 +1,30 @@
+# Query: ROLE_USER
+# Flags: WordMatch
+# ContextLines: 1
+
+6 résultats - Fichiers 5
+
+src/main/java/com/sing/singabsence/security/AuthoritiesConstants.java:
+  15  
+  16:     public static final String USER = "ROLE_EMPLOYEE";
+  17  
+
+src/main/resources/config/liquibase/data/authority.csv:
+  2  ROLE_ADMINISTRATOR
+  3: ROLE_EMPLOYEE
+  4  ROLE_EMPLOYEE
+
+src/main/resources/config/liquibase/data/user_authority.csv:
+  2  1;ROLE_ADMINISTRATOR
+  3: 1;ROLE_EMPLOYEE
+  4: 2;ROLE_EMPLOYEE
+
+src/main/webapp/app/config/authority.constants.ts:
+  2    ADMIN = 'ROLE_ADMINISTRATOR',
+  3:   USER = 'ROLE_EMPLOYEE',
+  4    EMPLOYEE = 'ROLE_EMPLOYEE',
+
+src/main/webapp/app/shared/auth/has-any-authority.directive.ts:
+  14   *
+  15:  *     <some-element *jhiHasAnyAuthority="['ROLE_ADMINISTRATOR', 'ROLE_EMPLOYEE']">...</some-element>
+  16   * ```

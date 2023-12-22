@@ -1,0 +1,109 @@
+# Query: AuthoritiesConstants.ADMIN
+# ContextLines: 1
+
+26 résultats - Fichiers 8
+
+src/main/java/com/sing/singabsence/config/SecurityConfiguration.java:
+  72                      .requestMatchers(mvc.pattern("/api/account/reset-password/finish")).permitAll()
+  73:                     .requestMatchers(mvc.pattern("/api/admin/**")).hasAuthority(AuthoritiesConstants.ADMINISTRATOR)
+  74                      .requestMatchers(mvc.pattern("/api/**")).authenticated()
+  75                      .requestMatchers(mvc.pattern("/websocket/**")).authenticated()
+  76:                     .requestMatchers(mvc.pattern("/v3/api-docs/**")).hasAuthority(AuthoritiesConstants.ADMINISTRATOR)
+  77                      .requestMatchers(mvc.pattern("/management/health")).permitAll()
+
+  80                      .requestMatchers(mvc.pattern("/management/prometheus")).permitAll()
+  81:                     .requestMatchers(mvc.pattern("/management/**")).hasAuthority(AuthoritiesConstants.ADMINISTRATOR)
+  82              )
+
+src/main/java/com/sing/singabsence/config/WebsocketSecurityConfiguration.java:
+  17              .simpDestMatchers("/topic/tracker")
+  18:             .hasAuthority(AuthoritiesConstants.ADMINISTRATOR)
+  19              // matches any destination that starts with /topic/
+
+src/main/java/com/sing/singabsence/web/rest/UserResource.java:
+  108      @PostMapping("/users")
+  109:     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMINISTRATOR + "\")")
+  110      public ResponseEntity<User> createUser(@Valid @RequestBody AdminUserDTO userDTO) throws URISyntaxException {
+
+  138      @PutMapping("/users")
+  139:     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMINISTRATOR + "\")")
+  140      public ResponseEntity<AdminUserDTO> updateUser(@Valid @RequestBody AdminUserDTO userDTO) {
+
+  164      @GetMapping("/users")
+  165:     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMINISTRATOR + "\")")
+  166      public ResponseEntity<List<AdminUserDTO>> getAllUsers(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
+
+  187      @GetMapping("/users/{login}")
+  188:     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMINISTRATOR + "\")")
+  189      public ResponseEntity<AdminUserDTO> getUser(@PathVariable @Pattern(regexp = Constants.LOGIN_REGEX) String login) {
+
+  200      @DeleteMapping("/users/{login}")
+  201:     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMINISTRATOR + "\")")
+  202      public ResponseEntity<Void> deleteUser(@PathVariable @Pattern(regexp = Constants.LOGIN_REGEX) String login) {
+
+src/test/java/com/sing/singabsence/security/SecurityUtilsUnitTest.java:
+  74          assertThat(SecurityUtils.hasCurrentUserThisAuthority(AuthoritiesConstants.USER)).isTrue();
+  75:         assertThat(SecurityUtils.hasCurrentUserThisAuthority(AuthoritiesConstants.ADMINISTRATOR)).isFalse();
+  76      }
+
+  85  
+  86:         assertThat(SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.USER, AuthoritiesConstants.ADMINISTRATOR)).isTrue();
+  87:         assertThat(SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.ANONYMOUS, AuthoritiesConstants.ADMINISTRATOR)).isFalse();
+  88      }
+
+  97  
+  98:         assertThat(SecurityUtils.hasCurrentUserNoneOfAuthorities(AuthoritiesConstants.USER, AuthoritiesConstants.ADMINISTRATOR)).isFalse();
+  99:         assertThat(SecurityUtils.hasCurrentUserNoneOfAuthorities(AuthoritiesConstants.ANONYMOUS, AuthoritiesConstants.ADMINISTRATOR)).isTrue();
+  100      }
+
+src/test/java/com/sing/singabsence/web/filter/SpaWebFilterIT.java:
+  33      @Test
+  34:     @WithMockUser(authorities = AuthoritiesConstants.ADMINISTRATOR)
+  35      void testFilterDoesNotForwardToIndexForV3ApiDocs() throws Exception {
+
+src/test/java/com/sing/singabsence/web/rest/AccountResourceIT.java:
+   75          Set<String> authorities = new HashSet<>();
+   76:         authorities.add(AuthoritiesConstants.ADMINISTRATOR);
+   77  
+
+   97              .andExpect(jsonPath("$.langKey").value("en"))
+   98:             .andExpect(jsonPath("$.authorities").value(AuthoritiesConstants.ADMINISTRATOR));
+   99      }
+
+  354          validUser.setLangKey(Constants.DEFAULT_LANGUAGE);
+  355:         validUser.setAuthorities(Collections.singleton(AuthoritiesConstants.ADMINISTRATOR));
+  356  
+
+  411          userDTO.setLangKey(Constants.DEFAULT_LANGUAGE);
+  412:         userDTO.setAuthorities(Collections.singleton(AuthoritiesConstants.ADMINISTRATOR));
+  413  
+
+  448          userDTO.setLangKey(Constants.DEFAULT_LANGUAGE);
+  449:         userDTO.setAuthorities(Collections.singleton(AuthoritiesConstants.ADMINISTRATOR));
+  450  
+
+  484          userDTO.setLangKey(Constants.DEFAULT_LANGUAGE);
+  485:         userDTO.setAuthorities(Collections.singleton(AuthoritiesConstants.ADMINISTRATOR));
+  486  
+
+  513          userDTO.setLangKey(Constants.DEFAULT_LANGUAGE);
+  514:         userDTO.setAuthorities(Collections.singleton(AuthoritiesConstants.ADMINISTRATOR));
+  515  
+
+src/test/java/com/sing/singabsence/web/rest/PublicUserResourceIT.java:
+  26  @AutoConfigureMockMvc
+  27: @WithMockUser(authorities = AuthoritiesConstants.ADMINISTRATOR)
+  28  @IntegrationTest
+
+  82              .andExpect(jsonPath("$").isArray())
+  83:             .andExpect(jsonPath("$").value(hasItems(AuthoritiesConstants.USER, AuthoritiesConstants.ADMINISTRATOR)));
+  84      }
+
+src/test/java/com/sing/singabsence/web/rest/UserResourceIT.java:
+   33  @AutoConfigureMockMvc
+   34: @WithMockUser(authorities = AuthoritiesConstants.ADMINISTRATOR)
+   35  @IntegrationTest
+
+  543  
+  544:         authorityB.setName(AuthoritiesConstants.ADMINISTRATOR);
+  545          assertThat(authorityA).isNotEqualTo(authorityB);
