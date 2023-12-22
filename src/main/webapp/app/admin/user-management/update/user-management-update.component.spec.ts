@@ -23,7 +23,7 @@ describe('User Management Update Component', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            data: of({ user: new User(123, 'user', 'first', 'last', 'first@last.com', true, 'en', [Authority.USER], 'admin') }),
+            data: of({ user: new User(123, 'user', 'first', 'last', 'first@last.com', true, 'en', [Authority.EMPLOYEE], 'admin') }),
           },
         },
       ],
@@ -43,14 +43,14 @@ describe('User Management Update Component', () => {
       [],
       fakeAsync(() => {
         // GIVEN
-        jest.spyOn(service, 'authorities').mockReturnValue(of(['USER']));
+        jest.spyOn(service, 'authorities').mockReturnValue(of(['EMPLOYEE']));
 
         // WHEN
         comp.ngOnInit();
 
         // THEN
         expect(service.authorities).toHaveBeenCalled();
-        expect(comp.authorities).toEqual(['USER']);
+        expect(comp.authorities).toEqual(['EMPLOYEE']);
       }),
     ));
   });

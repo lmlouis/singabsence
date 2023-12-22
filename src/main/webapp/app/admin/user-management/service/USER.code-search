@@ -1,0 +1,196 @@
+# Query: USER
+# Flags: CaseSensitive WordMatch
+# Including: *.java, *.html, *.ts, *.csv, *.yaml
+# ContextLines: 1
+
+47 résultats - Fichiers 10
+
+src/main/java/com/sing/singabsence/service/MailService.java:
+  31  
+  32:     private static final String USER = "user";
+  33  
+
+  93          Context context = new Context(locale);
+  94:         context.setVariable(USER, user);
+  95          context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+
+src/main/java/com/sing/singabsence/service/UserService.java:
+  129          Set<Authority> authorities = new HashSet<>();
+  130:         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
+  131          newUser.setAuthorities(authorities);
+
+src/main/webapp/app/admin/user-management/detail/user-management-detail.component.spec.ts:
+  20            useValue: {
+  21:             data: of({ user: new User(123, 'user', 'first', 'last', 'first@last.com', true, 'en', [Authority.EMPLOEE], 'admin') }),
+  22            },
+
+  49            langKey: 'en',
+  50:           authorities: [Authority.EMPLOEE],
+  51            createdBy: 'admin',
+
+src/main/webapp/app/admin/user-management/service/user-management.service.spec.ts:
+  47  
+  48:       req.flush([Authority.EMPLOEE, Authority.ADMIN]);
+  49:       expect(expectedResult).toEqual([Authority.EMPLOEE, Authority.ADMIN]);
+  50      });
+
+src/main/webapp/app/admin/user-management/update/user-management-update.component.spec.ts:
+  25            useValue: {
+  26:             data: of({ user: new User(123, 'user', 'first', 'last', 'first@last.com', true, 'en', [Authority.EMPLOEE], 'admin') }),
+  27            },
+
+  45          // GIVEN
+  46:         jest.spyOn(service, 'authorities').mockReturnValue(of(['USER']));
+  47  
+
+  52          expect(service.authorities).toHaveBeenCalled();
+  53:         expect(comp.authorities).toEqual(['USER']);
+  54        }),
+
+src/main/webapp/app/core/auth/account.service.spec.ts:
+  203        it('should return false if user is not logged', () => {
+  204:         const hasAuthority = service.hasAnyAuthority(Authority.EMPLOEE);
+  205          expect(hasAuthority).toBe(false);
+
+  208        it('should return false if user is logged and has not authority', () => {
+  209:         service.authenticate(accountWithAuthorities([Authority.EMPLOEE]));
+  210  
+
+  216        it('should return true if user is logged and has authority', () => {
+  217:         service.authenticate(accountWithAuthorities([Authority.EMPLOEE]));
+  218  
+  219:         const hasAuthority = service.hasAnyAuthority(Authority.EMPLOEE);
+  220  
+
+  226        it('should return false if user is not logged', () => {
+  227:         const hasAuthority = service.hasAnyAuthority([Authority.EMPLOEE]);
+  228          expect(hasAuthority).toBeFalsy();
+
+  231        it('should return false if user is logged and has not authority', () => {
+  232:         service.authenticate(accountWithAuthorities([Authority.EMPLOEE]));
+  233  
+
+  239        it('should return true if user is logged and has authority', () => {
+  240:         service.authenticate(accountWithAuthorities([Authority.EMPLOEE]));
+  241  
+  242:         const hasAuthority = service.hasAnyAuthority([Authority.EMPLOEE, Authority.ADMIN]);
+  243  
+
+src/test/java/com/sing/singabsence/security/SecurityUtilsUnitTest.java:
+  69          Collection<GrantedAuthority> authorities = new ArrayList<>();
+  70:         authorities.add(new SimpleGrantedAuthority(AuthoritiesConstants.USER));
+  71          securityContext.setAuthentication(new UsernamePasswordAuthenticationToken("user", "user", authorities));
+
+  73  
+  74:         assertThat(SecurityUtils.hasCurrentUserThisAuthority(AuthoritiesConstants.USER)).isTrue();
+  75          assertThat(SecurityUtils.hasCurrentUserThisAuthority(AuthoritiesConstants.ADMIN)).isFalse();
+
+  81          Collection<GrantedAuthority> authorities = new ArrayList<>();
+  82:         authorities.add(new SimpleGrantedAuthority(AuthoritiesConstants.USER));
+  83          securityContext.setAuthentication(new UsernamePasswordAuthenticationToken("user", "user", authorities));
+
+  85  
+  86:         assertThat(SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.USER, AuthoritiesConstants.ADMIN)).isTrue();
+  87          assertThat(SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.ANONYMOUS, AuthoritiesConstants.ADMIN)).isFalse();
+
+  93          Collection<GrantedAuthority> authorities = new ArrayList<>();
+  94:         authorities.add(new SimpleGrantedAuthority(AuthoritiesConstants.USER));
+  95          securityContext.setAuthentication(new UsernamePasswordAuthenticationToken("user", "user", authorities));
+
+  97  
+  98:         assertThat(SecurityUtils.hasCurrentUserNoneOfAuthorities(AuthoritiesConstants.USER, AuthoritiesConstants.ADMIN)).isFalse();
+  99          assertThat(SecurityUtils.hasCurrentUserNoneOfAuthorities(AuthoritiesConstants.ANONYMOUS, AuthoritiesConstants.ADMIN)).isTrue();
+
+src/test/java/com/sing/singabsence/web/rest/AccountResourceIT.java:
+  116          validUser.setLangKey(Constants.DEFAULT_LANGUAGE);
+  117:         validUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+  118          assertThat(userRepository.findOneByLogin("test-register-valid")).isEmpty();
+
+  138          invalidUser.setLangKey(Constants.DEFAULT_LANGUAGE);
+  139:         invalidUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+  140  
+
+  160          invalidUser.setLangKey(Constants.DEFAULT_LANGUAGE);
+  161:         invalidUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+  162  
+
+  182          invalidUser.setLangKey(Constants.DEFAULT_LANGUAGE);
+  183:         invalidUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+  184  
+
+  204          invalidUser.setLangKey(Constants.DEFAULT_LANGUAGE);
+  205:         invalidUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+  206  
+
+  226          firstUser.setLangKey(Constants.DEFAULT_LANGUAGE);
+  227:         firstUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+  228  
+
+  276          firstUser.setLangKey(Constants.DEFAULT_LANGUAGE);
+  277:         firstUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+  278  
+
+  364              .hasSize(1)
+  365:             .containsExactly(authorityRepository.findById(AuthoritiesConstants.USER).orElseThrow());
+  366      }
+
+src/test/java/com/sing/singabsence/web/rest/PublicUserResourceIT.java:
+  82              .andExpect(jsonPath("$").isArray())
+  83:             .andExpect(jsonPath("$").value(hasItems(AuthoritiesConstants.USER, AuthoritiesConstants.ADMIN)));
+  84      }
+
+src/test/java/com/sing/singabsence/web/rest/UserResourceIT.java:
+  132          user.setLangKey(DEFAULT_LANGKEY);
+  133:         user.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+  134  
+
+  165          user.setLangKey(DEFAULT_LANGKEY);
+  166:         user.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+  167  
+
+  191          user.setLangKey(DEFAULT_LANGKEY);
+  192:         user.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+  193  
+
+  217          user.setLangKey(DEFAULT_LANGKEY);
+  218:         user.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+  219  
+
+  299          user.setLastModifiedDate(updatedUser.getLastModifiedDate());
+  300:         user.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+  301  
+
+  340          user.setLastModifiedDate(updatedUser.getLastModifiedDate());
+  341:         user.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+  342  
+
+  392          user.setLastModifiedDate(updatedUser.getLastModifiedDate());
+  393:         user.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+  394  
+
+  432          user.setLastModifiedDate(updatedUser.getLastModifiedDate());
+  433:         user.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+  434  
+
+  484          userDTO.setLastModifiedBy(DEFAULT_LOGIN);
+  485:         userDTO.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
+  486  
+
+  499          assertThat(user.getLastModifiedDate()).isNotNull();
+  500:         assertThat(user.getAuthorities()).extracting("name").containsExactly(AuthoritiesConstants.USER);
+  501      }
+
+  511          Authority authority = new Authority();
+  512:         authority.setName(AuthoritiesConstants.USER);
+  513          authorities.add(authority);
+
+  529          assertThat(userDTO.getLastModifiedDate()).isEqualTo(user.getLastModifiedDate());
+  530:         assertThat(userDTO.getAuthorities()).containsExactly(AuthoritiesConstants.USER);
+  531          assertThat(userDTO.toString()).isNotNull();
+
+  546  
+  547:         authorityA.setName(AuthoritiesConstants.USER);
+  548          assertThat(authorityA).isNotEqualTo(authorityB);
+  549  
+  550:         authorityB.setName(AuthoritiesConstants.USER);
+  551          assertThat(authorityA).isEqualTo(authorityB).hasSameHashCodeAs(authorityB);

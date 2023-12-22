@@ -27,7 +27,7 @@ import LoginComponent from './login/login.component';
         {
           path: 'admin',
           data: {
-            authorities: [Authority.ADMIN],
+            authorities: [Authority.ADMINISTRATOR],
           },
           canActivate: [UserRouteAccessService],
           loadChildren: () => import('./admin/admin-routing.module'),

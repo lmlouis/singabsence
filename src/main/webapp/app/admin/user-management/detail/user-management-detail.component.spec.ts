@@ -18,7 +18,7 @@ describe('User Management Detail Component', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            data: of({ user: new User(123, 'user', 'first', 'last', 'first@last.com', true, 'en', [Authority.USER], 'admin') }),
+            data: of({ user: new User(123, 'user', 'first', 'last', 'first@last.com', true, 'en', [Authority.EMPLOYEE], 'admin') }),
           },
         },
       ],
@@ -47,7 +47,7 @@ describe('User Management Detail Component', () => {
           email: 'first@last.com',
           activated: true,
           langKey: 'en',
-          authorities: [Authority.USER],
+          authorities: [Authority.EMPLOYEE],
           createdBy: 'admin',
         }),
       );
